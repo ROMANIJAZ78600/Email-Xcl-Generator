@@ -46,8 +46,7 @@ function App() {
 <a href="https://finovoglobal.com">
   <img
     src="https://finovoglobal.com/public/assets/imgs/finallogoblack.png"
-    width="192"
-    height="67"
+    style="width: 2.00in; height: 0.70in;"
     alt="Finovo Global"
   />
 </a>
@@ -135,7 +134,7 @@ function App() {
       );
 
       try {
-        const response = await fetch(`${App_Url}/api/send-mail`, {
+        const response = await fetch(`${App_Url}/api/send-email`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
