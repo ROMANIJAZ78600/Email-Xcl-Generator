@@ -10,7 +10,7 @@ function App() {
     "This change could help you win more bookings",
   );
   const [body, setBody] = useState(`
-<p>Hi {first_name},</p>
+<p>Hi {firstname},</p>
 
 <p>
   When a traveler changes a booking, does your team need to update the itinerary,
