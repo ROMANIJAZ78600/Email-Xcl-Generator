@@ -59,6 +59,26 @@ app.post("/api/send-email", async (req, res) => {
   }
 });
 
+app.get("/api/test-smtp", async (req, res) => {
+  try {
+    await transporter.verify();
+
+    res.json({
+      success: true,
+      message: "SMTP connection successful",
+    });
+  } catch (error) {
+    console.error("SMTP verify error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+      code: error.code,
+      command: error.command,
+    });
+  }
+});
+
 const PORT = 5000;
 
 app.listen(PORT, () => {

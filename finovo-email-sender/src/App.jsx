@@ -3,6 +3,7 @@ import * as XLSX from "xlsx";
 import "./App.css";
 
 function App() {
+  const App_Url = import.meta.env.VITE_API_URL;
   const [email, setEmail] = useState("");
   const [firstname, setFirstname] = useState("");
   const [recipients, setRecipients] = useState([]);
@@ -10,7 +11,7 @@ function App() {
     "This change could help you win more bookings",
   );
   const [body, setBody] = useState(`
-<p>Hi {firstname},</p>
+<p>Hi {first_name},</p>
 
 <p>
   When a traveler changes a booking, does your team need to update the itinerary,
@@ -45,8 +46,8 @@ function App() {
 <a href="https://finovoglobal.com">
   <img
     src="https://finovoglobal.com/public/assets/imgs/finallogoblack.png"
-    style="width: 2.00in; height: 0.7in;"
-    
+    width="192"
+    height="67"
     alt="Finovo Global"
   />
 </a>
@@ -134,21 +135,18 @@ function App() {
       );
 
       try {
-        const response = await fetch(
-          "https://email-backend-1cp3.onrender.com/api/send-email",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: recipient.email,
-              firstname: recipient.firstname,
-              subject: subject,
-              body: body,
-            }),
+        const response = await fetch(`${App_Url}/api/send-mail`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-        );
+          body: JSON.stringify({
+            email: recipient.email,
+            firstname: recipient.firstname,
+            subject: subject,
+            body: body,
+          }),
+        });
 
         const data = await response.json();
 
