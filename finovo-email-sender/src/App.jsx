@@ -28,7 +28,7 @@ function App() {
 </p>
 
 <p>
-  Best regards,<br><br>
+  Best regards,<br>
   <strong>Roman</strong><br>
   Business Development Manager<br>
   Finovo Global<br>
