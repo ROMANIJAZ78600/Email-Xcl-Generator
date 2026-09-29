@@ -134,18 +134,21 @@ function App() {
       );
 
       try {
-        const response = await fetch("http://localhost:5000/api/send-email", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
+        const response = await fetch(
+          "https://email-backend-1cp3.onrender.com//api/send-email",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: recipient.email,
+              firstname: recipient.firstname,
+              subject: subject,
+              body: body,
+            }),
           },
-          body: JSON.stringify({
-            email: recipient.email,
-            firstname: recipient.firstname,
-            subject: subject,
-            body: body,
-          }),
-        });
+        );
 
         const data = await response.json();
 
