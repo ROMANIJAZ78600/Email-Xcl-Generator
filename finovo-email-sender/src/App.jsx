@@ -135,7 +135,7 @@ function App() {
 
       try {
         const response = await fetch(
-          "https://email-backend-1cp3.onrender.com//api/send-email",
+          "https://email-backend-1cp3.onrender.com/api/send-email",
           {
             method: "POST",
             headers: {
