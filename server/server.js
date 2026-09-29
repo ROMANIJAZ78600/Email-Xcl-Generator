@@ -24,22 +24,37 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/api/test-smtp", async (req, res) => {
+app.post("/api/send-email", async (req, res) => {
   try {
-    await transporter.verify();
+    const { email, firstname, subject, body } = req.body;
+    if (!email || !firstname || !subject || !body) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing required fields",
+      });
+    }
+
+    const personalized_body = body.replace(/\{first_name\}/g, firstname);
+
+    await transporter.sendMail({
+      from: process.env.EMAIL_ADDRESS,
+      to: email,
+      subject,
+      html: personalized_body,
+    });
 
     res.json({
       success: true,
-      message: "SMTP connection successful",
+      email,
+      firstname,
+      sentAt: new Date().toISOString(),
     });
   } catch (error) {
-    console.error("SMTP verify error:", error);
+    console.error("Email error:", error);
 
     res.status(500).json({
       success: false,
       message: error.message,
-      code: error.code,
-      command: error.command,
     });
   }
 });
